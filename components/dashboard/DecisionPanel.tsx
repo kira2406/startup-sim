@@ -3,7 +3,18 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function DecisionPanel({ game }: { game: any }) {
+interface GameData {
+  id: string;
+  status: string;
+  engineer_count: number;
+  sales_staff_count: number;
+  price?: number; 
+  salary_pct?: number;
+  engineer_to_be_hired?: number;
+  sales_to_be_hired?: number;
+}
+
+export default function DecisionPanel({ game }: { game: GameData }) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   

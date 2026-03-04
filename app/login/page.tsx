@@ -1,4 +1,5 @@
 import { login, signup } from '@/actions/auth'
+import Link from 'next/link'
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error: string }> }) {
 
@@ -21,6 +22,12 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
 
         <label htmlFor="password">Password</label>
         <input className="p-2 border rounded" id="password" name="password" type="password" required />
+
+        <div className="flex justify-end mt-1">
+          <Link href="/forgot-password" className="text-sm font-medium text-blue-600 hover:underline">
+            Forgot Password?
+          </Link>
+        </div>
 
         <div className="flex gap-4 mt-4">
           <button formAction={login} className="flex-1 p-2 text-white bg-blue-600 rounded">
