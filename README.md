@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Startup Simulator
 
-## Getting Started
+A single-player, turn-based startup simulation game where players manage a growing software company. The game requires balancing quarterly business decisions (pricing, salaries, and hiring) against a server-authoritative mathematical model to avoid bankruptcy and reach a 10-year win state.
 
-First, run the development server:
+Built with **Next.js** (App Router) and **Supabase** (PostgreSQL, Auth, RLS)
+
+
+## Setup Instructions
+
+Ensure you have Docker (for local Supabase) and Node.js installed. 
 
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Copy environment variables and fill in your Supabase credentials
+cp .env.example .env.local
+
+# 3. Push the database schema to your Supabase project
+npx supabase db push
+
+# 4. Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Write-up
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Problem Solved:** This project delivers a server-authoritative, turn-based startup simulation. It provides a cohesive vertical slice where players manage quarterly business decisions (pricing, hiring, salaries) while a secure backend mathematical model computes economic outcomes and visualizes organizational growth.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Technical Decision:** I combined Next.js App Router with Supabase PostgreSQL RPCs (Remote Procedure Calls). By isolating the game engine into pure server-side modules and executing both the current state updates and the history logging within a single atomic database transaction, I guaranteed clients cannot manipulate simulation outcomes. This zero-trust architecture prevents race conditions and enforces strict data integrity.
 
-## Learn More
+**Future Improvement:** Given the opportunity, I would implement Supabase Realtime subscriptions on the frontend. Currently, the client relies on standard HTTP requests to fetch the newly computed state after a turn advances. Subscribing directly to database changes would allow the dashboard and office visualization  to update instantly, creating a smoother, more reactive user experience
 
-To learn more about Next.js, take a look at the following resources:
+## What Was Built
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Authentication:** Fully secured email and password login using Supabase Auth, including a PKCE flow for password resets.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Server-Authoritative** Game Loop: The core mathematical model executes purely on the server using Next.js Route Handlers and strictly validated with Zod. State is persisted via an atomic PostgreSQL function (advance_game_turn).
 
-## Deploy on Vercel
+**Material Design Dashboard:** A clean, responsive dashboard utilizing next-themes, displaying current metrics and a ledger of the last 4 quarters.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Dynamic Office Visualization:** A DOM-based visual representation of the startup that dynamically scales as engineering and sales headcount grows.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Zero-Trust Security:** Row Level Security (RLS) is strictly enforced on all tables, ensuring users can only read, update, or delete their own game states.
+
+## Tradeoffs & Descoping Decisions
+
+**Office Visualization Rendering:** I opted to use pure React DOM elements styled with Tailwind CSS rather than reaching for the Canvas API or WebGL. This decision prioritized maintainability, instant server-side rendering, and bundle size over complex animations, which perfectly satisfied the requirement to show visually distinct desks filling up as headcount grows.
+
+**Economic Simulation Scope:** The mathematical simulation was kept strictly to the provided constants and formulas. I intentionally avoided adding complex market dynamics (like fluctuating competitor pricing or randomized market crashes) to focus the evaluation on architectural engineering execution rather than game design.
