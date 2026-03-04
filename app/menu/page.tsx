@@ -28,7 +28,7 @@ export default async function MenuPage() {
       <Navbar />
     <main className="flex flex-col items-center justify-center p-8">
       <div className="w-full max-w-md p-8 text-center bg-white border rounded shadow-md">
-        <h1 className="mb-6 text-3xl font-bold">Startup Simulator</h1>
+        <h1 className="mb-6 text-3xl font-bold text-slate-800">Startup Simulator</h1>
         
         {game && game.status !== 'active' && (
           <div className="p-4 mb-6 rounded bg-blue-50">

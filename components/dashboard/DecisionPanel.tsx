@@ -57,8 +57,8 @@ export default function DecisionPanel({ game }: { game: GameData }) {
   }
 
   return (
-    <form onSubmit={handleAdvance} className="p-6 bg-white border rounded shadow-sm">
-      <h2 className="mb-4 text-xl font-bold">Quarterly Decisions</h2>
+    <form onSubmit={handleAdvance} className="p-6 bg-white border rounded shadow-sm text-slate-800">
+      <h2 className="mb-4 text-xl font-bold ">Quarterly Decisions</h2>
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div>
           <label className="block text-sm font-medium">Unit Price ($)</label>

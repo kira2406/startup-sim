@@ -6,7 +6,7 @@ export default function HistoryChart({ history }: { history: any[] }) {
   }
 
   return (
-    <div className="bg-white border rounded shadow-sm overflow-hidden">
+    <div className="bg-white border rounded shadow-sm overflow-hidden text-slate-800">
       <h3 className="p-4 text-lg font-bold border-b bg-gray-50">Last 4 Quarters Performance</h3>
       <table className="w-full text-left border-collapse">
         <thead>
