@@ -23,14 +23,6 @@ npx supabase db push
 npm run dev
 ```
 
-## Write-up
-
-**Problem Solved:** This project delivers a server-authoritative, turn-based startup simulation. It provides a cohesive vertical slice where players manage quarterly business decisions (pricing, hiring, salaries) while a secure backend mathematical model computes economic outcomes and visualizes organizational growth.
-
-**Technical Decision:** I combined Next.js App Router with Supabase PostgreSQL RPCs (Remote Procedure Calls). By isolating the game engine into pure server-side modules and executing both the current state updates and the history logging within a single atomic database transaction, I guaranteed clients cannot manipulate simulation outcomes. This zero-trust architecture prevents race conditions and enforces strict data integrity.
-
-**Future Improvement:** Given the opportunity, I would implement Supabase Realtime subscriptions on the frontend. Currently, the client relies on standard HTTP requests to fetch the newly computed state after a turn advances. Subscribing directly to database changes would allow the dashboard and office visualization  to update instantly, creating a smoother, more reactive user experience
-
 ## Architecture & Database Schema
 
 The database is designed around three core principles: separation of concerns, data integrity, and zero-trust security.
