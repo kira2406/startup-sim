@@ -48,3 +48,22 @@ npm run dev
 **Office Visualization Rendering:** I opted to use pure React DOM elements styled with Tailwind CSS rather than reaching for the Canvas API or WebGL. This decision prioritized maintainability, instant server-side rendering, and bundle size over complex animations, which perfectly satisfied the requirement to show visually distinct desks filling up as headcount grows.
 
 **Economic Simulation Scope:** The mathematical simulation was kept strictly to the provided constants and formulas. I intentionally avoided adding complex market dynamics (like fluctuating competitor pricing or randomized market crashes) to focus the evaluation on architectural engineering execution rather than game design.
+
+## Screenshots
+
+### Dashboard
+<p align="center">
+  <img src="image.png" width="600" />
+</p>
+
+### Game Win Scenario
+- Complete 10 years with positive cash
+<p align="center">
+   <img src="image-1.png" width="600" />
+</p>
+
+### Game Lose Scenario
+- Cash goes into negative
+<p align="center">
+   <img src="image-2.png" width="600" />
+</p>

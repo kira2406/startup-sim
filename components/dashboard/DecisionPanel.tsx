@@ -58,6 +58,19 @@ export default function DecisionPanel({ game }: { game: GameData }) {
 
   return (
     <form onSubmit={handleAdvance} className="p-6 bg-white border rounded shadow-sm text-slate-800">
+      {game.status !== 'active' && (
+        <div
+          className={`p-4 mb-4 text-sm text-center border rounded ${
+            game.status === 'won'
+              ? 'text-blue-700 bg-blue-100 border-blue-200'
+              : 'text-red-700 bg-red-100 border-red-200'
+          }`}
+        >
+          {game.status === 'won'
+            ? "🎉 Congratulations! You have won the game."
+            : "The game has ended. You have lost the game. Please start a new game to play again."}
+        </div>
+      )}
       <h2 className="mb-4 text-xl font-bold ">Quarterly Decisions</h2>
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div>
@@ -88,7 +101,7 @@ export default function DecisionPanel({ game }: { game: GameData }) {
         </div>
       </div>
 
-      <button disabled={loading || game.status !== 'active'} type="submit" className="w-full p-3 font-bold text-white bg-blue-600 rounded disabled:bg-gray-400">
+      <button disabled={loading || game.status !== 'active'} type="submit" className="w-full p-3 font-bold text-white bg-blue-600 rounded disabled:bg-gray-400 cursor-pointer">
         {loading ? 'Processing...' : 'Advance Quarter'}
       </button>
     </form>

@@ -43,7 +43,7 @@ export default async function MenuPage() {
           {hasActiveGame && (
             <Link 
               href="/dashboard" 
-              className="w-full p-3 font-bold text-white bg-green-600 rounded hover:bg-green-700"
+              className="w-full p-3 font-bold text-white bg-green-600 rounded hover:bg-green-700 cursor-pointer"
             >
               Continue Game (Q{game.current_quarter})
             </Link>
@@ -52,7 +52,7 @@ export default async function MenuPage() {
           <form action={startNewGame}>
             <button 
               type="submit" 
-              className={`w-full p-3 font-bold rounded ${
+              className={`w-full p-3 font-bold rounded cursor-pointer ${
                 hasActiveGame 
                   ? 'text-gray-700 bg-gray-200 hover:bg-gray-300' 
                   : 'text-white bg-blue-600 hover:bg-blue-700'
